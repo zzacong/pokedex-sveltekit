@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  import PokemonStore from '../stores/pokestore'
+</script>
+
+<svelte:head>
+  <title>Pokedex | SvelteKit</title>
+</svelte:head>
+
+<h1>SvelteKit Pokedex</h1>
+
+{#each $PokemonStore as p (p.id)}
+  <p class="text-red-400">{p.name}</p>
+{/each}
