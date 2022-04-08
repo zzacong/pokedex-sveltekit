@@ -3,6 +3,8 @@ export const capitalise = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)
 export async function fetchPokemon(id) {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`
   const res = await fetch(url)
+  console.log(res)
+  if (!res.ok) throw new Error('error fetching')
   return res.json()
 }
 
