@@ -20,7 +20,7 @@ export const load = (({ cookies }) => {
 		/**
 		 * The correct answer, revealed if the game is over
 		 */
-		answer: game.answers.length >= 6 ? game.answer : null
+		answer: game.answers.length >= 6 ? game.answer : null,
 	};
 }) satisfies PageServerLoad;
 
@@ -54,7 +54,7 @@ export const actions = {
 		const game = new Game(cookies.get('sverdle'));
 
 		const data = await request.formData();
-		const guess = data.getAll('guess')  as string[];
+		const guess = data.getAll('guess') as string[];
 
 		if (!game.enter(guess)) {
 			return fail(400, { badGuess: true });
@@ -65,5 +65,5 @@ export const actions = {
 
 	restart: async ({ cookies }) => {
 		cookies.delete('sverdle');
-	}
+	},
 } satisfies Actions;

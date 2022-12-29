@@ -17,9 +17,9 @@ export async function fetchPokemons(limit = 100) {
 		return {
 			...p,
 			id,
-			image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+			image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`,
 		};
-	}) as z.infer<typeof pokemonsSchema>;
+	}) as Pokemons;
 }
 
 const pokemonsSchema = z
@@ -27,7 +27,7 @@ const pokemonsSchema = z
 		id: z.number(),
 		image: z.string().url(),
 		name: z.string(),
-		url: z.string().url()
+		url: z.string().url(),
 	})
 	.array();
 
@@ -36,5 +36,7 @@ const pokemonSchema = z.object({
 	weight: z.number(),
 	height: z.number(),
 	types: z.object({ type: z.object({ name: z.string() }) }).array(),
-	sprites: z.object({ front_default: z.string().url() })
+	sprites: z.object({ front_default: z.string().url() }),
 });
+
+export type Pokemons = z.infer<typeof pokemonsSchema>;
